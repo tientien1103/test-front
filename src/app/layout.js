@@ -1,5 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import CardCategory from "@/components/CardCategory";
+import { SideBarList } from "../constant/SideBarMenu";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,7 +25,16 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className="min-h-screen flex">
+          <aside className="w-64 bg-white text-primary p-4 border-r border-gray-200">
+            <ul>
+              {SideBarList.map((item) => (
+                <CardCategory key={item} item={item} />
+              ))}
+            </ul>
+          </aside>
+          <main className="flex-1 bg-white p-6">{children}</main>
+        </div>
       </body>
     </html>
   );
